@@ -2,8 +2,8 @@
 public class Principal {
   public static void main(String[] args) {
     Leitura leitura = new Leitura();
-    Picole p = new Picole();
-    Casquinha c = new Casquinha();
+    Picole picole = new Picole();
+    Casquinha casquinha = new Casquinha();
     Pote pote = new Pote();
     
     String tipo = "";
@@ -12,53 +12,66 @@ public class Principal {
 
     switch (tipo) {
       case "1":
-        p.setSaborPrincipal(leitura.entDados("Qual o sabor principal do picole?"));
-        p.setSaborSecundario(leitura.entDados("Qual o sabor secundario do picole?"));
-        p.setPreco(Double.parseDouble(leitura.entDados("Qual o preco do picole?")));
+        picole.setSaborPrincipal(leitura.entDados("Qual o sabor principal do picole?"));
+        picole.setSaborSecundario(leitura.entDados("Qual o sabor secundario do picole?"));
+        picole.setPreco(Double.parseDouble(leitura.entDados("Qual o preco do picole?")));
         try {
-          p.setPeso(Integer.parseInt(leitura.entDados("Qual o peso do picole?")));
+          picole.setPeso(Integer.parseInt(leitura.entDados("Qual o peso do picole?")));
         } catch (PesoNegativoException pne) {
           pne.impPesoNegativo();
-          p = (Picole) pne.corPesoNegativoSorvete(p);
+          picole = (Picole) pne.corrigePesoNegativoSorvete(picole);
         }
-        p.getAdicional().setNome(leitura.entDados("Qual o nome do adicional?"));
-        p.getAdicional().setValor(Double.parseDouble(leitura.entDados("Qual o valor do adicional?")));
-        p.setFormato(leitura.entDados("Qual o formato do picole?"));
-        p.setEhPintaLingua(leitura.entDados("O picole eh pinta lingua?"));
+        picole.getAdicional().setNome(leitura.entDados("Qual o nome do adicional?"));
+        picole.getAdicional().setValor(Double.parseDouble(leitura.entDados("Qual o valor do adicional?")));
+        picole.setFormato(leitura.entDados("Qual o formato do picole?"));
 
-        System.out.println("SABOR PRINCIPAL DO PICOLE: " + p.getSaborPrincipal());
-        System.out.println("SABOR SECUNDARIO DO PICOLE: " + p.getSaborSecundario());
-        System.out.println("PRECO DO PICOLE: " + p.getPreco());
-        System.out.println("PESO DO PICOLE: " + p.getPeso());
-        System.out.println("NOME DO ADICIONAL: " + p.getAdicional().getNome());
-        System.out.println("VALOR DO ADICIONAL: " + p.getAdicional().getValor());
-        System.out.println("FORMATO DO PICOLE: " + p.getFormato());
-        System.out.println("EH PINTA LINGUA: " + p.getEhPintaLingua());
+        String opcPl = leitura.entDados("O picole eh pinta lingua?\n[1] - SIM\n[2] - NAO");
+
+        if (opcPl.equals("1")) {
+          picole.setEhPintaLingua(true);
+        } else {
+          picole.setEhPintaLingua(false);
+        } 
+
+        System.out.println("SABOR PRINCIPAL DO PICOLE: " + picole.getSaborPrincipal());
+        System.out.println("SABOR SECUNDARIO DO PICOLE: " + picole.getSaborSecundario());
+        System.out.println("PRECO DO PICOLE: " + picole.getPreco());
+        System.out.println("PESO DO PICOLE: " + picole.getPeso());
+        System.out.println("NOME DO ADICIONAL: " + picole.getAdicional().getNome());
+        System.out.println("VALOR DO ADICIONAL: " + picole.getAdicional().getValor());
+        System.out.println("FORMATO DO PICOLE: " + picole.getFormato());
+        
+        if (picole.getEhPintaLingua()) {
+          System.out.println("EH PINTA LINGUA");
+        } else {
+          picole.getEhPintaLingua();
+          System.out.println("NAO EH PINTA LINGUA");
+        }
         break;
       case "2":
-        c.setSaborPrincipal(leitura.entDados("Qual o sabor principal da casquinha?"));
-        c.setSaborSecundario(leitura.entDados("Qual o sabor secundario da casquinha?"));
-        c.setPreco(Double.parseDouble(leitura.entDados("Qual o preco da casquinha?")));
+        casquinha.setSaborPrincipal(leitura.entDados("Qual o sabor principal da casquinha?"));
+        casquinha.setSaborSecundario(leitura.entDados("Qual o sabor secundario da casquinha?"));
+        casquinha.setPreco(Double.parseDouble(leitura.entDados("Qual o preco da casquinha?")));
         try {
-            c.setPeso(Integer.parseInt(leitura.entDados("Qual o peso da casquinha?")));
+            casquinha.setPeso(Integer.parseInt(leitura.entDados("Qual o peso da casquinha?")));
         } catch (PesoNegativoException pne) {
           pne.impPesoNegativo();
-          c = (Casquinha) pne.corPesoNegativoSorvete(c);
+          casquinha = (Casquinha) pne.corrigePesoNegativoSorvete(casquinha);
         }
-        c.getAdicional().setNome(leitura.entDados("Qual o nome do adicional?"));
-        c.getAdicional().setValor(Double.parseDouble(leitura.entDados("Qual o valor do adicional?")));
-        c.setSaborCasquinha(leitura.entDados("Qual o sabor da casquinha?"));
-        c.setTemperatura(leitura.entDados("Qual a temperatura da casquinha?"));
+        casquinha.getAdicional().setNome(leitura.entDados("Qual o nome do adicional?"));
+        casquinha.getAdicional().setValor(Double.parseDouble(leitura.entDados("Qual o valor do adicional?")));
+        casquinha.setSaborCasquinha(leitura.entDados("Qual o sabor da casquinha?"));
+        casquinha.setTemperatura(leitura.entDados("Qual a temperatura da casquinha?"));
 
-        System.out.println("SABOR PRINCIPAL DA CASQUINHA: " + c.getSaborPrincipal());
-        System.out.println("SABOR SECUNDARIO DA CASQUINHA: " + c.getSaborSecundario());
-        System.out.println("PRECO DA CASQUINHA: " + c.getPreco());
-        System.out.println("PESO DA CASQUINHA: " + c.getPeso());
-        System.out.println("NOME DO ADICIONAL: " + c.getAdicional().getNome());
-        System.out.println("VALOR DO ADICIONAL: " + c.getAdicional().getValor());
-        System.out.println("SABOR DA CASQUINHA: " + c.getSaborCasquinha());
-        System.out.println("TEMPERATURA DA CASQUINHA: " + c.getTemperatura());
-        c.calcularQualidade();
+        System.out.println("SABOR PRINCIPAL DA CASQUINHA: " + casquinha.getSaborPrincipal());
+        System.out.println("SABOR SECUNDARIO DA CASQUINHA: " + casquinha.getSaborSecundario());
+        System.out.println("PRECO DA CASQUINHA: " + casquinha.getPreco());
+        System.out.println("PESO DA CASQUINHA: " + casquinha.getPeso());
+        System.out.println("NOME DO ADICIONAL: " + casquinha.getAdicional().getNome());
+        System.out.println("VALOR DO ADICIONAL: " + casquinha.getAdicional().getValor());
+        System.out.println("SABOR DA CASQUINHA: " + casquinha.getSaborCasquinha());
+        System.out.println("TEMPERATURA DA CASQUINHA: " + casquinha.getTemperatura());
+        casquinha.calcularQualidade();
         break;
       case "3":
         pote.setSaborPrincipal(leitura.entDados("Qual o sabor principal do pote?"));
@@ -68,7 +81,7 @@ public class Principal {
             pote.setPeso(Integer.parseInt(leitura.entDados("Qual o peso do pote?")));
         } catch (PesoNegativoException pne) {
           pne.impPesoNegativo();
-          pote = (Pote) pne.corPesoNegativoSorvete(pote);
+          pote = (Pote) pne.corrigePesoNegativoSorvete(pote);
         }
         pote.getAdicional().setNome(leitura.entDados("Qual o nome do adicional?"));
         pote.getAdicional().setValor(Double.parseDouble(leitura.entDados("Qual o valor do adicional?")));

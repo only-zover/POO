@@ -7,14 +7,14 @@ public class PesoNegativoException extends Exception {
     System.out.println("Peso negativo");
   }
 
-  public Sorvete corPesoNegativoSorvete(Sorvete sorvete) {
+  public Sorvete corrigePesoNegativoSorvete(Sorvete sorvete) {
 
     try {
       sorvete.setPeso(Integer.parseInt(leitura.entDados("Peso invalido, digite um peso maior que 0")));
     } catch (PesoNegativoException pne) {
       pne.impPesoNegativo();
-      sorvete = pne.corPesoNegativoSorvete(sorvete);
-    }
+      sorvete = pne.corrigePesoNegativoSorvete(sorvete);
+    } 
 
     return sorvete;
   }
